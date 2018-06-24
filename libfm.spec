@@ -7,7 +7,7 @@
 %define edevname %mklibname -d fm-extra
 %define git 0
 %bcond_without gtk
-%bcond_without bootstrap
+%bcond_with bootstrap
 
 Summary:	GIO-based library for file manager-like programs
 Name:		libfm
@@ -16,7 +16,7 @@ Version:	1.3.0.2
 Release:	0.%{git}.1
 Source0:	%{name}-%{git}.tar.xz
 %else
-Release:	1
+Release:	2
 Source0:	https://github.com/lxde/libfm/archive/%{version}.tar.gz
 %endif
 License:	GPLv2

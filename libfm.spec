@@ -4,8 +4,10 @@
 %define elibname %mklibname fm-extra %{major}
 %define glibname %mklibname fm-gtk %{major}
 %define devname %mklibname -d fm
+%define edevname %mklibname -d fm-extra
 %define git 0
 %bcond_without gtk
+%bcond_without bootstrap
 
 Summary:	GIO-based library for file manager-like programs
 Name:		libfm
@@ -32,7 +34,9 @@ BuildRequires:	pkgconfig(glib-2.0) >= 2.26.0
 BuildRequires:	pkgconfig(gobject-2.0)
 BuildRequires:	pkgconfig(gthread-2.0)
 BuildRequires:	pkgconfig(libexif)
-#BuildRequires:	pkgconfig(libmenu-cache) >= 0.3.2
+%if %{without bootstrap}
+BuildRequires:	pkgconfig(libmenu-cache) >= 0.3.2
+%endif
 BuildRequires:	pkgconfig(pango) >= 1.16.0
 %if %{with gtk}
 BuildRequires:	pkgconfig(gtk+-2.0) >= 2.18.0
@@ -84,13 +88,21 @@ Requires:	%{libname} = %{EVRD}
 Summary:	%{name} developement files
 Group:		File tools
 Requires:	%{libname} = %{version}-%{release}
-Requires:	%{elibname} = %{version}-%{release}
 Requires:	%{glibname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 
 %description -n %{devname}
 This package contains header files needed when building applications based on
 %{name}.
+
+%package -n %{edevname}
+Summary:	%{name}-extra developement files
+Group:		File tools
+Requires:	%{elibname} = %{version}-%{release}
+
+%description -n %{edevname}
+This package contains header files needed when building applications based on
+%{name}-extra.
 
 %package -n lxshortcut
 Summary:	Edit app shortcuts
@@ -112,9 +124,12 @@ with freedesktop.org Desktop Entry spec.
 
 %build
 %configure \
-    --enable-udisks \
+	--enable-udisks \
+%if %{with bootstrap}
+	--with-extra-only \
+%endif
 %if %{without gtk}
-    --without-gtk
+	--without-gtk
 %endif
 
 %make
@@ -128,8 +143,11 @@ rm -rf %{buildroot}%{_includedir}/%{name}
 mkdir -p %{buildroot}%{_includedir}/%{name}
 cp -f %{buildroot}%{_includedir}/%{name}-%{api}/* %{buildroot}%{_includedir}/%{name}/
 
+%if %{without bootstrap}
 %find_lang %{name}
+%endif
 
+%if %{without bootstrap}
 %files -f %{name}.lang
 %config(noreplace) %{_sysconfdir}/xdg/libfm/libfm.conf
 %dir %{_datadir}/%{name}
@@ -152,12 +170,14 @@ cp -f %{buildroot}%{_includedir}/%{name}-%{api}/* %{buildroot}%{_includedir}/%{n
 %files -n %{libname}
 %{_libdir}/libfm.so.%{major}*
 
-%files -n %{elibname}
-%{_libdir}/libfm-extra.so.%{major}*
-
 %if %{with gtk}
 %files -n %{glibname}
 %{_libdir}/libfm-gtk.so.%{major}*
+
+%files -n lxshortcut
+%{_bindir}/lxshortcut
+%{_datadir}/applications/lxshortcut.desktop
+%{_mandir}/man1/lxshortcut.1*
 %endif
 
 %files -n %{devname}
@@ -166,18 +186,29 @@ cp -f %{buildroot}%{_includedir}/%{name}-%{api}/* %{buildroot}%{_includedir}/%{n
 %dir %{_includedir}/%{name}-%{api}
 %{_includedir}/%{name}/*.h
 %{_includedir}/%{name}-%{api}/*.h
+%exclude %{_includedir}/%{name}/fm-xml-file.h
+%exclude %{_includedir}/%{name}/fm-version.h
+%exclude %{_includedir}/%{name}/fm-extra.h
+%exclude %{_includedir}/%{name}-%{api}/fm-xml-file.h
+%exclude %{_includedir}/%{name}-%{api}/fm-version.h
+%exclude %{_includedir}/%{name}-%{api}/fm-extra.h
 %{_libdir}/libfm.so
-%{_libdir}/libfm-extra.so
 %{_libdir}/pkgconfig/libfm.pc
-%{_libdir}/pkgconfig/libfm-extra.pc
 %if %{with gtk}
 %{_libdir}/libfm-gtk.so
 %{_libdir}/pkgconfig/libfm-gtk.pc
 %endif
-
-%if %{with gtk}
-%files -n lxshortcut
-%{_bindir}/lxshortcut
-%{_datadir}/applications/lxshortcut.desktop
-%{_mandir}/man1/lxshortcut.1*
 %endif
+
+%files -n %{elibname}
+%{_libdir}/libfm-extra.so.%{major}*
+
+%files -n %{edevname}
+%{_libdir}/libfm-extra.so
+%{_libdir}/pkgconfig/libfm-extra.pc
+%{_includedir}/%{name}/fm-xml-file.h
+%{_includedir}/%{name}/fm-version.h
+%{_includedir}/%{name}/fm-extra.h
+%{_includedir}/%{name}-%{api}/fm-xml-file.h
+%{_includedir}/%{name}-%{api}/fm-version.h
+%{_includedir}/%{name}-%{api}/fm-extra.h

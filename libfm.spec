@@ -9,13 +9,13 @@
 
 Summary:	GIO-based library for file manager-like programs
 Name:		libfm
-Version:	1.2.5
+Version:	1.3.0.2
 %if %{git}
 Release:	0.%{git}.1
 Source0:	%{name}-%{git}.tar.xz
 %else
 Release:	1
-Source0:	http://downloads.sourceforge.net/pcmanfm/%{name}-%{version}.tar.xz
+Source0:	https://github.com/lxde/libfm/archive/%{version}.tar.gz
 %endif
 License:	GPLv2
 Group:		File tools
@@ -32,7 +32,7 @@ BuildRequires:	pkgconfig(glib-2.0) >= 2.26.0
 BuildRequires:	pkgconfig(gobject-2.0)
 BuildRequires:	pkgconfig(gthread-2.0)
 BuildRequires:	pkgconfig(libexif)
-BuildRequires:	pkgconfig(libmenu-cache) >= 0.3.2
+#BuildRequires:	pkgconfig(libmenu-cache) >= 0.3.2
 BuildRequires:	pkgconfig(pango) >= 1.16.0
 %if %{with gtk}
 BuildRequires:	pkgconfig(gtk+-2.0) >= 2.18.0

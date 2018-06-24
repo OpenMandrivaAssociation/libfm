@@ -71,7 +71,9 @@ Requires:	%{name} = %{version}-%{release}
 %package -n %{elibname}
 Summary:	%{name} extra library package
 Group:		File tools
+%if %{without bootstrap}
 Requires:	%{libname} = %{EVRD}
+%endif
 
 %description -n %{elibname}
 %{summary}

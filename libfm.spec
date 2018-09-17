@@ -16,7 +16,7 @@ Version:	1.3.0.2
 Release:	0.%{git}.1
 Source0:	%{name}-%{git}.tar.xz
 %else
-Release:	2
+Release:	3
 Source0:	https://github.com/lxde/libfm/archive/%{version}.tar.gz
 %endif
 License:	GPLv2
@@ -120,7 +120,7 @@ with freedesktop.org Desktop Entry spec.
 %else
 %setup -q
 %endif
-%apply_patches
+%autopatch -p1
 
 [ -e autogen.sh ] && ./autogen.sh
 
@@ -134,16 +134,10 @@ with freedesktop.org Desktop Entry spec.
 	--without-gtk
 %endif
 
-%make
+%make_build
 
 %install
-%makeinstall_std
-
-#some hack for avoid upgrade error
-#copy all in libfm-1.0 in includedir to libfm instead symlink, rather early it is true
-rm -rf %{buildroot}%{_includedir}/%{name}
-mkdir -p %{buildroot}%{_includedir}/%{name}
-cp -f %{buildroot}%{_includedir}/%{name}-%{api}/* %{buildroot}%{_includedir}/%{name}/
+%make_install
 
 %if %{without bootstrap}
 %find_lang %{name}

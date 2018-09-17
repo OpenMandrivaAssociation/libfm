@@ -139,6 +139,12 @@ with freedesktop.org Desktop Entry spec.
 %install
 %make_install
 
+#some hack for avoid upgrade error
+#copy all in libfm-1.0 in includedir to libfm instead symlink, rather early it is true
+rm -rf %{buildroot}%{_includedir}/%{name}
+mkdir -p %{buildroot}%{_includedir}/%{name}
+cp -f %{buildroot}%{_includedir}/%{name}-%{api}/* %{buildroot}%{_includedir}/%{name}/
+
 %if %{without bootstrap}
 %find_lang %{name}
 %endif

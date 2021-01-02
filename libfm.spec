@@ -16,7 +16,7 @@ Version:	1.3.1
 Release:	0.%{git}.2
 Source0:	%{name}-%{git}.tar.xz
 %else
-Release:	1
+Release:	2
 Source0:	https://github.com/lxde/libfm/archive/%{version}/%{name}-%{version}.tar.gz
 %endif
 License:	GPLv2

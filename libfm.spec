@@ -39,8 +39,6 @@ BuildRequires:	pkgconfig(libmenu-cache) >= 0.3.2
 %endif
 BuildRequires:	pkgconfig(pango) >= 1.16.0
 %if %{with gtk}
-BuildRequires:	pkgconfig(gtk+-2.0)
-%else
 BuildRequires:	pkgconfig(gtk+-3.0)
 %endif
 %if %{without gtk}

@@ -2,11 +2,11 @@
 %define major 4
 %define libname %mklibname fm %{major}
 %define elibname %mklibname fm-extra %{major}
-%define glibname %mklibname fm-gtk %{major}
+%define glibname %mklibname fm-gtk 3 %{major}
 %define devname %mklibname -d fm
 %define edevname %mklibname -d fm-extra
 %define git 0
-%bcond_with gtk
+%bcond_without gtk
 %bcond_with bootstrap
 
 Summary:	GIO-based library for file manager-like programs
@@ -16,7 +16,7 @@ Version:	1.3.1
 Release:	0.%{git}.2
 Source0:	%{name}-%{git}.tar.xz
 %else
-Release:	2
+Release:	3
 Source0:	https://github.com/lxde/libfm/archive/%{version}/%{name}-%{version}.tar.gz
 %endif
 License:	GPLv2
@@ -39,7 +39,9 @@ BuildRequires:	pkgconfig(libmenu-cache) >= 0.3.2
 %endif
 BuildRequires:	pkgconfig(pango) >= 1.16.0
 %if %{with gtk}
-BuildRequires:	pkgconfig(gtk+-2.0) >= 2.18.0
+BuildRequires:	pkgconfig(gtk+-2.0)
+%else
+BuildRequires:	pkgconfig(gtk+-3.0)
 %endif
 %if %{without gtk}
 Obsoletes:	lxshortcut <= 1.2.3-2
@@ -134,6 +136,8 @@ with freedesktop.org Desktop Entry spec.
 %endif
 %if %{without gtk}
 	--without-gtk
+%else
+        --with-gtk=3
 %endif
 
 %make_build
@@ -176,7 +180,7 @@ cp -f %{buildroot}%{_includedir}/%{name}-%{api}/* %{buildroot}%{_includedir}/%{n
 
 %if %{with gtk}
 %files -n %{glibname}
-%{_libdir}/libfm-gtk.so.%{major}*
+%{_libdir}/libfm-gtk3.so.%{major}*
 
 %files -n lxshortcut
 %{_bindir}/lxshortcut
@@ -199,8 +203,8 @@ cp -f %{buildroot}%{_includedir}/%{name}-%{api}/* %{buildroot}%{_includedir}/%{n
 %{_libdir}/libfm.so
 %{_libdir}/pkgconfig/libfm.pc
 %if %{with gtk}
-%{_libdir}/libfm-gtk.so
-%{_libdir}/pkgconfig/libfm-gtk.pc
+%{_libdir}/libfm-gtk3.so
+%{_libdir}/pkgconfig/libfm-gtk3.pc
 %endif
 %endif
 

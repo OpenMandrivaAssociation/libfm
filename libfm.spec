@@ -90,7 +90,9 @@ Requires:	%{libname} = %{EVRD}
 Summary:	%{name} developement files
 Group:		File tools
 Requires:	%{libname} = %{version}-%{release}
+%if %{with gtk}
 Requires:	%{glibname} = %{version}-%{release}
+%endif
 Provides:	%{name}-devel = %{version}-%{release}
 
 %description -n %{devname}

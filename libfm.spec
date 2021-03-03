@@ -11,12 +11,12 @@
 
 Summary:	GIO-based library for file manager-like programs
 Name:		libfm
-Version:	1.3.1
+Version:	1.3.2
 %if %{git}
 Release:	0.%{git}.2
 Source0:	%{name}-%{git}.tar.xz
 %else
-Release:	3
+Release:	1
 Source0:	https://github.com/lxde/libfm/archive/%{version}/%{name}-%{version}.tar.gz
 %endif
 License:	GPLv2

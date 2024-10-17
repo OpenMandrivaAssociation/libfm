@@ -27,7 +27,7 @@ Release:	2
 Source0:	https://github.com/lxde/libfm/archive/%{?snapshot:%{commit}}%{!?snapshot:%{version}}/%{name}-%{?snapshot:%{commit}}%{!?snapshot:%{version}}.tar.gz
 License:	GPLv2
 Group:		File tools
-Url:		http://pcmanfm.sourceforge.net/
+Url:		https://pcmanfm.sourceforge.net/
 Patch0:		libfm-0.1.5-set-cutomization.patch
 BuildRequires:	gettext
 BuildRequires:	gtk-doc

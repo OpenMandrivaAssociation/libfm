@@ -13,8 +13,8 @@
 # git snapshot
 %global snapshot 1
 %if 0%{?snapshot}
-	%global commit		5346a5390a0881d5713a71e15f371132680056ee
-	%global commitdate	20230916
+	%global commit		4d2f7b41407f769e2ef4df5e74e736921c90aa92
+	%global commitdate	20240823
 	%global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %endif
 
@@ -23,7 +23,7 @@
 Summary:	GIO-based library for file manager-like programs
 Name:		libfm
 Version:	1.3.2
-Release:	2
+Release:	3
 Source0:	https://github.com/lxde/libfm/archive/%{?snapshot:%{commit}}%{!?snapshot:%{version}}/%{name}-%{?snapshot:%{commit}}%{!?snapshot:%{version}}.tar.gz
 License:	GPLv2
 Group:		File tools

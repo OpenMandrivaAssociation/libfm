@@ -11,7 +11,7 @@
 %define oldglibname	%mklibname fm-gtk 3 4
 
 # git snapshot
-%global snapshot 0
+#global snapshot 0
 %if 0%{?snapshot}
 	%global commit		4d2f7b41407f769e2ef4df5e74e736921c90aa92
 	%global commitdate	20240823

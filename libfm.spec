@@ -11,7 +11,7 @@
 %define oldglibname	%mklibname fm-gtk 3 4
 
 # git snapshot
-%global snapshot 1
+#global snapshot 0
 %if 0%{?snapshot}
 	%global commit		4d2f7b41407f769e2ef4df5e74e736921c90aa92
 	%global commitdate	20240823
@@ -22,8 +22,8 @@
 
 Summary:	GIO-based library for file manager-like programs
 Name:		libfm
-Version:	1.3.2
-Release:	3
+Version:	1.4.0
+Release:	1
 Source0:	https://github.com/lxde/libfm/archive/%{?snapshot:%{commit}}%{!?snapshot:%{version}}/%{name}-%{?snapshot:%{commit}}%{!?snapshot:%{version}}.tar.gz
 License:	GPLv2
 Group:		File tools

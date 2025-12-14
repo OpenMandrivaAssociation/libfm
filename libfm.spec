@@ -22,7 +22,7 @@
 
 Summary:	GIO-based library for file manager-like programs
 Name:		libfm
-Version:	1.4.0
+Version:	1.4.1
 Release:	1
 Source0:	https://github.com/lxde/libfm/archive/%{?snapshot:%{commit}}%{!?snapshot:%{version}}/%{name}-%{?snapshot:%{commit}}%{!?snapshot:%{version}}.tar.gz
 License:	GPLv2

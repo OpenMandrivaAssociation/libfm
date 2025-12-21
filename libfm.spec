@@ -29,6 +29,11 @@ License:	GPLv2
 Group:		File tools
 Url:		https://pcmanfm.sourceforge.net/
 Patch0:		libfm-0.1.5-set-cutomization.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	gettext
 BuildRequires:	gtk-doc
 BuildRequires:	intltool

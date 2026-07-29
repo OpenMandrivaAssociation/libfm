@@ -23,7 +23,7 @@
 Summary:	GIO-based library for file manager-like programs
 Name:		libfm
 Version:	1.4.1
-Release:	1
+Release:	2
 Source0:	https://github.com/lxde/libfm/archive/%{?snapshot:%{commit}}%{!?snapshot:%{version}}/%{name}-%{?snapshot:%{commit}}%{!?snapshot:%{version}}.tar.gz
 License:	GPLv2
 Group:		File tools
@@ -31,7 +31,6 @@ Url:		https://pcmanfm.sourceforge.net/
 Patch0:		libfm-0.1.5-set-cutomization.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	libtool-base
 BuildRequires:	slibtool
 BuildRequires:	make
 BuildRequires:	gettext
@@ -108,7 +107,6 @@ Requires:	%{name} = %{version}-%{release}
 %package -n %{elibname}
 Summary:	%{name} extra library package
 Group:		File tools
-Requires:	%{libname} = %{EVRD}
 Obsoletes:	%oldelibname < %{EVRD}
 
 %description -n %{elibname}
